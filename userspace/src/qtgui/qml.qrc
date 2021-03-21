@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>clientsource/fail.qml</file>
+        <file>clientsource/main.qml</file>
+        <file>web/dist/index.html</file>
+        <file>web/dist/main.js</file>
+    </qresource>
+</RCC>
