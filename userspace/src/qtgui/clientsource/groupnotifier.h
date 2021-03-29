@@ -20,6 +20,7 @@ signals:
 public slots:
   void dataRecieved();
 private:
+  void writeDatagramOnAllNics(const QByteArray& datagram, const QHostAddress& host, quint16 port);
   QUdpSocket listener;
   QHostAddress groupAddress;
   quint16 hostPort;

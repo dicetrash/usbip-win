@@ -55,13 +55,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <OutDir>$(SolutionDir)$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)$(Configuration)\$(Platform)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutDir>..\..\..\Release\x64</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\lib;..\..\..\include;..\usbip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link />
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;SetupAPI.lib;$(Qt_LIBS_);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;SetupAPI.lib;$(Qt_LIBS_);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -97,7 +112,6 @@
     <ClCompile Include="ksource\usbipc_detach.c" />
     <ClCompile Include="ksource\usbipc_list_remote.c" />
     <ClCompile Include="ksource\usbipc_list_imported.c" />
-    <ClCompile Include="ksource\usbipc_names.c" />
     <ClCompile Include="main.cpp" />
     <QtRcc Include="qml.qrc" />
     <None Include="clientsource\fail.qml" />
@@ -114,6 +128,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="kcommon.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\driver\vhci\usbip_vhci.vcxproj">
+      <Project>{f35a874e-e790-44b5-9c14-749c8854a0c4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\usbip_common.vcxproj">
+      <Project>{2c173853-88c0-4334-85bf-0b46cfd5a007}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

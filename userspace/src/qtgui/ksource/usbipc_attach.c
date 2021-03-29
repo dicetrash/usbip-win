@@ -10,7 +10,6 @@
  */
 
 #include "usbip_windows.h"
-
 #include <stdlib.h>
 
 #include "usbip_common.h"
@@ -223,7 +222,8 @@ execute_attacher(HANDLE hdev, SOCKET sockfd, int rhport)
 	si.dwFlags = STARTF_USESTDHANDLES;
 	ZeroMemory(&pi, sizeof(pi));
 
-	res = CreateProcess((LPCWSTR)"attacher.exe", (LPWSTR)"attacher.exe", NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi);
+	LPWSTR attacher = L"attacher.exe";
+	res = CreateProcess(attacher, attacher, NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi);
 	if (!res) {
 		DWORD	err = GetLastError();
 		if (err == ERROR_FILE_NOT_FOUND)
@@ -316,5 +316,5 @@ attach_device(const char* host, const char* busid, const char* serial, BOOL ters
 
 int usbipc_attach(char* host, char* busid)
 {
-	return attach_device(host, busid, NULL, NULL);
+	return attach_device(host, busid, NULL, FALSE);
 }

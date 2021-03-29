@@ -46,9 +46,6 @@
     <ClCompile Include="ksource\usbipc_detach.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ksource\usbipc_names.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="clientsource\coordinator.h">

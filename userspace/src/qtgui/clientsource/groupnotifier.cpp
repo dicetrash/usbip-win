@@ -4,6 +4,8 @@
 #include <QHostAddress>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QNetworkInterface>
+#include <Windows.h>
 #include <QHostInfo>
 
 #define FIND_MESSAGE "usbip-find"
@@ -18,9 +20,16 @@ GroupNotifier::GroupNotifier(QString groupIpv4Host, qint16 hostPort) : groupAddr
   connect(&listener, &QUdpSocket::readyRead, this, &GroupNotifier::dataRecieved);
 }
 
+void GroupNotifier::writeDatagramOnAllNics(const QByteArray& datagram, const QHostAddress& host, quint16 port) {
+    for (auto nic : QNetworkInterface::allInterfaces()) {
+        listener.setMulticastInterface(nic);
+        listener.writeDatagram(datagram, host, port);
+    }
+}
+
 void GroupNotifier::find()
 {
-  listener.writeDatagram(FIND_MESSAGE, groupAddress, hostPort);
+    writeDatagramOnAllNics(FIND_MESSAGE, groupAddress, hostPort);
 }
 
 void GroupNotifier::listAdmin(QString hostAddr) {

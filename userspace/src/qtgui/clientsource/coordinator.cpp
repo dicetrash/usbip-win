@@ -135,8 +135,8 @@ void Coordinator::sendDgram(const QNetworkDatagram datagram) {
         QJsonObject obj(device.toObject());
         auto prodInt(obj["product"].toString().toUInt(nullptr,16));
         auto vendInt(obj["vendor"].toString().toUInt(nullptr,16));
-        const char* vendor = usbipc_names_vendor(vendInt);
-        const char* product = usbipc_names_product(vendInt, prodInt);
+        const char* vendor = names_vendor(vendInt);
+        const char* product = names_product(vendInt, prodInt);
         arr.append(QJsonObject({
            {"product", obj["product"].toString()},
            {"vendor", obj["vendor"].toString()},
@@ -161,6 +161,8 @@ void Coordinator::sendDgram(const QNetworkDatagram datagram) {
 
   usbip_names_free();
 }
+
+
 
 GroupNotifier *Coordinator::getNotifier()
 {

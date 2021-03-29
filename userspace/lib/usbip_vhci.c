@@ -71,7 +71,7 @@ usbip_vhci_driver_close(HANDLE hdev)
 }
 
 static int
-usbip_vhci_get_ports_status(HANDLE hdev, ioctl_usbip_vhci_get_ports_status *st)
+usbip_vhci_get_ports_status(HANDLE hdev, ioctl_usbip_vhci_get_ports_status* st)
 {
 	unsigned long	len;
 

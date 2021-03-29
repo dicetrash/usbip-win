@@ -26,6 +26,3 @@ void usbip_devices_free(struct usbip_devices* device);
 
 struct usbip_external_list* usbip_list_remote(char* host);
 void usbip_external_list_free(struct usbip_external_list* device);
-
-const char* usbipc_names_vendor(uint16_t);
-const char* usbipc_names_product(uint16_t, uint16_t);
